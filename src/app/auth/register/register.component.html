@@ -1,0 +1,28 @@
+
+<div class="auth-page">
+    <div class="container page">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-xs-12">
+                <h1 class="text-xs-center">Sign Up</h1>
+                <p class="text-xs-center">
+                    <a [routerLink]="['/login']">Have an account?</a>
+                </p>
+                Backend errors
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <fieldset>
+                        <fieldset class="form-group">
+                            <input formControlName="username" type="text" placeholder="Username" class="form-control form-control-lg">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input formControlName="email" type="text" placeholder="Email" class="form-control form-control-lg">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <input formControlName="password" type="password" placeholder="Password" class="form-control form-control-lg">
+                        </fieldset>
+                        <button [disabled]="isSubmitting$|async" class="btn btn-primary btn-lg pull-xs-right">Sign Up</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

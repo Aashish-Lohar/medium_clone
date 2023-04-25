@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
-import { registerAction } from '../store/actions/register.action';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { isSubmittingSelector, validationErrorsSelector } from '../store/selector';
-import { RegisterRequestInterface } from '../types/registerRequest.interface';
 import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.interface';
+import { LoginRequestInterface } from '../../types/loginRequest.interface';
+import { loginAction } from '../../store/actions/login.action';
+import { isSubmittingSelector, validationErrorsSelector } from '../../store/selector';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class LoginComponent implements OnInit {
   form!:FormGroup;
   isSubmitting$!:Observable<boolean>
   backendErrors$!:Observable<BackendErrorsInterface|null>
@@ -26,21 +26,22 @@ export class RegisterComponent implements OnInit {
   }
 
   initializeValues(){
-    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
-    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
+    this.isSubmitting$ = this.store.select(isSubmittingSelector);
+    this.backendErrors$ = this.store.select(validationErrorsSelector);
+
   }
   initializeForm(){
     this.form = this.fb.group({
-      username:['', Validators.required],
       email:['', Validators.required],
       password:['', Validators.required]
     })
   }
 
   onSubmit(){
-    const request:RegisterRequestInterface = {
+    const request:LoginRequestInterface = {
       user:this.form.value
     }
-    this.store.dispatch(registerAction({request}))
+    this.store.dispatch(loginAction({request}))
+    // this.authService.register(this.form.value)
   }
 }

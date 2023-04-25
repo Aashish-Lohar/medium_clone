@@ -6,7 +6,8 @@ import { AuthModule } from './auth/auth.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {HttpClientModule} from '@angular/common/http';
-import { EffectsModule } from '@ngrx/effects'
+import { EffectsModule } from '@ngrx/effects';
+import { TopbarModule } from './shared/modules/topbar/topbar.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -14,6 +15,7 @@ import { EffectsModule } from '@ngrx/effects'
   imports: [
     BrowserModule,
     AuthModule,
+    TopbarModule,
     AppRoutingModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),

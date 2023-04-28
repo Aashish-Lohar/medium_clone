@@ -12,6 +12,9 @@ import { PersistenceService } from './shared/services/persistence.service';
 import { AuthInterceptor } from './shared/services/auth.interceptor';
 import { GlobalFeedModule } from './globalFeed/global-feed.module';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
+import { YourFeedModule } from './yourFeed/your-feed.module';
+import { TagFeedModule } from './tagFeed/tag-feed.module';
+import { ArticleModule } from './article/article.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -26,7 +29,10 @@ import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     HttpClientModule,
     EffectsModule.forRoot([]),
-    GlobalFeedModule
+    GlobalFeedModule,
+    YourFeedModule,
+    TagFeedModule,
+    ArticleModule
   ],
   providers: [
     PersistenceService,

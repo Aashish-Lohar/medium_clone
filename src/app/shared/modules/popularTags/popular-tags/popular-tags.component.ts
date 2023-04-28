@@ -29,4 +29,8 @@ export class PopularTagsComponent implements OnInit{
     this.store.dispatch(getPopularTagsAction())
   }
 
+  redirectToTags(){
+    
+  }
+
 }

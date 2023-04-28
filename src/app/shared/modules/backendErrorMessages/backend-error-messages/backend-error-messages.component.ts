@@ -20,7 +20,6 @@ export class BackendErrorMessagesComponent implements OnInit{
       }
     )
   }
-    console.log('backendErrorsInput',this.backendErrorsInput);
     
   }
 }

@@ -30,11 +30,9 @@ export class FeedComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.initializeValue()
     this.initializeListeners()
+    console.log('apiUrlInput',this.apiUrlInput);
   }
-  ngOnDestroy(): void {
-    this.queryParamsSubscription.unsubscribe()
-  }
-
+  
   initializeValue(){
     this.feed$ = this.store.pipe(select(feedSelector))
     this.error$ = this.store.pipe(select(errorSelector))
@@ -43,25 +41,26 @@ export class FeedComponent implements OnInit, OnDestroy{
   }
   initializeListeners(){
     this.queryParamsSubscription = this.routes.queryParams.subscribe((params:Params)=>{
-      console.log('params',params);
       this.currentPage = Number(params['page']||'1')
-      console.log('currenPage',this.currentPage);
       this.fetchFeed()
     })
   }
   fetchFeed(){
     const offset = this.currentPage*this.limit - this.limit
+    
     const parsedUrl = parseUrl(this.apiUrlInput)
     const stringifiedParams = stringify({
       limit:this.limit,
       offset,
       ...parsedUrl.query
     })
-
-    const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`
-    console.log('apiUrlWithParams',apiUrlWithParams);
     
+    const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`
+    console.log('apiUrlWithParams',apiUrlWithParams);   
     this.store.dispatch(getFeedAction({url:apiUrlWithParams}))
   }
   
+  ngOnDestroy(): void {
+    this.queryParamsSubscription.unsubscribe()
+  }
 }

@@ -3,8 +3,14 @@ import { Store, select } from '@ngrx/store';
 import { getArticleAction } from '../../store/getArticle.action';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleInterface } from 'src/app/shared/types/article.interface';
-import { Observable, Subscription } from 'rxjs';
-import { articleSelector, errorSelector, isLoadingSelector } from '../../store/getArticle.selectors';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
+import {
+  articleSelector,
+  errorSelector,
+  isLoadingSelector,
+} from '../../store/getArticle.selectors';
+import { isCurrentUserSelector } from 'src/app/auth/store/selector';
+import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
 
 @Component({
   selector: 'app-article',
@@ -15,8 +21,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
   slug!: string;
   article!: ArticleInterface;
   articleSubscription!: Subscription;
-  isLoading$!:Observable<boolean>;
-  error$!:Observable<string|null>;
+  isLoading$!: Observable<boolean>;
+  error$!: Observable<string | null>;
+  isAuthor$!: Observable<boolean>;
   constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -32,19 +39,34 @@ export class ArticleComponent implements OnInit, OnDestroy {
   initializeValues() {
     const query = this.route.snapshot.paramMap.get('slug');
     this.slug = query ? query : '';
-    this.isLoading$ = this.store.pipe(select(isLoadingSelector))
-    this.error$ = this.store.pipe(select(errorSelector))
+    this.isLoading$ = this.store.pipe(select(isLoadingSelector));
+    this.error$ = this.store.pipe(select(errorSelector));
+    this.isAuthor$ = combineLatest([
+      this.store.pipe(select(articleSelector)),
+      this.store.pipe(select(isCurrentUserSelector)),
+    ]).pipe(
+      map(
+        ([article, currentUser]: [
+          ArticleInterface | null,
+          CurrentUserInterface | null
+        ]) => {
+          if (!article || !currentUser) {
+            return false;
+          }
+          return currentUser.username === article.author.username;
+        }
+      )
+    );
   }
   initializeListeners() {
     this.articleSubscription = this.store
       .pipe(select(articleSelector))
       .subscribe((article: ArticleInterface | null) => {
-        if(article)
-          this.article = article
+        if (article) this.article = article;
       });
   }
 
   ngOnDestroy(): void {
-    this.articleSubscription.unsubscribe()
+    this.articleSubscription.unsubscribe();
   }
 }

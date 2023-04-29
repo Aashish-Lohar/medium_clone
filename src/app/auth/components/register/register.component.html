@@ -9,7 +9,8 @@
                 </p>
                 <app-backend-error-messages
                 *ngIf="backendErrors$ | async"
-                [backendErrorsInput]="backendErrors$ | async"></app-backend-error-messages>
+                [backendErrorsInput]="backendErrors$ | async"
+                [backendErrorsInputObs]="backendErrors$"></app-backend-error-messages>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <fieldset>
                         <fieldset class="form-group">

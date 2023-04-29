@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { LoadingModule } from '../shared/modules/loading/loading.module';
 import { ErrorMessageModule } from '../shared/modules/errorMessage/error-message.module';
 import { TagListModule } from '../shared/modules/tagList/tag-list.module';
+import { DeleteArticleEffect } from './store/deleteArticle.effect';
 
 const routes = [
   {path:'articles/:slug', component:ArticleComponent}
@@ -20,7 +21,7 @@ const routes = [
   ],
   imports: [
     CommonModule,
-    EffectsModule.forFeature([GetArticleEffect]),
+    EffectsModule.forFeature([GetArticleEffect,DeleteArticleEffect]),
     StoreModule.forFeature('article',reducers),
     RouterModule.forChild(routes),
     LoadingModule,

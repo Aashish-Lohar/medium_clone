@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.interface';
 
 @Component({
@@ -6,10 +7,14 @@ import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.inter
   templateUrl: './backend-error-messages.component.html',
   styleUrls: ['./backend-error-messages.component.scss']
 })
-export class BackendErrorMessagesComponent implements OnInit{
+export class BackendErrorMessagesComponent implements OnInit, OnDestroy{
   @Input() backendErrorsInput!:BackendErrorsInterface | null;
+  @Input() backendErrorsInputObs!:Observable<BackendErrorsInterface|null>
 
   errorMessages:string[]=[];
+  errorMessages2:string[]=[];
+
+  errorMessageSubscription!:Subscription
 
   ngOnInit(): void {
     if(this.backendErrorsInput){
@@ -20,6 +25,26 @@ export class BackendErrorMessagesComponent implements OnInit{
       }
     )
   }
+
+
+  // myyidea
+  if(this.backendErrorsInputObs){
+    this.errorMessageSubscription = this.backendErrorsInputObs.subscribe((response)=>{
+      console.log('myidea',response);
+      if(response){
+      this.errorMessages2 = Object.keys(response).map(
+        (name:string)=>{
+          const messages = response?response[name].join(' '):''
+          return `${name} ${messages}`
+        }
+      )
+      }
+    })
+  }
     
+  }
+
+  ngOnDestroy(): void {
+    this.errorMessageSubscription.unsubscribe()
   }
 }

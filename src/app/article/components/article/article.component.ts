@@ -11,6 +11,7 @@ import {
 } from '../../store/getArticle.selectors';
 import { isCurrentUserSelector } from 'src/app/auth/store/selector';
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
+import { deleteArticleAction } from '../../store/deleteArticle.action';
 
 @Component({
   selector: 'app-article',
@@ -64,6 +65,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .subscribe((article: ArticleInterface | null) => {
         if (article) this.article = article;
       });
+  }
+
+  deleteArticle(){
+    this.store.dispatch(deleteArticleAction({slug:this.slug}))
   }
 
   ngOnDestroy(): void {

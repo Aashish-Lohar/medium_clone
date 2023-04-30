@@ -14,26 +14,31 @@ import { LoginEffect } from './store/effects/login.effect';
 import { LoginComponent } from './components/login/login.component';
 import { getCurrentUserEffect } from './store/effects/getCurrentUser.effect';
 import { GlobalFeedModule } from '../globalFeed/global-feed.module';
+import { UpdateCurrentUserEffect } from './store/effects/updateCurrentUser.effect';
+import { LogoutEffect } from './store/effects/logout.effect';
 
 const routes: Routes = [
-  {path:'register', component:RegisterComponent},
-  {path:'login',component:LoginComponent}
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
-  declarations: [
-    RegisterComponent,
-    LoginComponent
-  ],
+  declarations: [RegisterComponent, LoginComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     StoreModule.forFeature('auth', reducers),
-    EffectsModule.forFeature([RegisterEffect, LoginEffect, getCurrentUserEffect]),
-    BackendErrorMessagesModule
+    EffectsModule.forFeature([
+      RegisterEffect,
+      LoginEffect,
+      getCurrentUserEffect,
+      UpdateCurrentUserEffect,
+      LogoutEffect
+    ]),
+    BackendErrorMessagesModule,
   ],
-  providers:[AuthService, PersistenceService],
-  exports:[RouterModule]
+  providers: [AuthService, PersistenceService],
+  exports: [RouterModule],
 })
-export class AuthModule { }
+export class AuthModule {}

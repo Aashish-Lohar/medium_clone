@@ -11,6 +11,7 @@ import { ErrorMessageModule } from '../errorMessage/error-message.module';
 import { LoadingModule } from '../loading/loading.module';
 import { PaginationModule } from '../pagination/pagination.module';
 import { TagListModule } from '../tagList/tag-list.module';
+import { AddToFavoritesModule } from '../addToFavorites/add-to-favorites.module';
 
 
 
@@ -24,7 +25,8 @@ import { TagListModule } from '../tagList/tag-list.module';
     ErrorMessageModule,
     LoadingModule,
     PaginationModule,
-    TagListModule
+    TagListModule,
+    AddToFavoritesModule
   ],
   exports:[FeedComponent],
   providers:[FeedService]

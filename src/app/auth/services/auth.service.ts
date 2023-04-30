@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RegisterRequestInterface } from '../types/registerRequest.interface';
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
+import { CurrentUserInputInterface } from 'src/app/shared/types/currentUserInput.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { ApiUrls } from 'src/app/shared/apiUrls';
@@ -36,5 +37,10 @@ export class AuthService {
   getCurrentUser():Observable<CurrentUserInterface>{
     const url = ApiUrls.baseUrl+ '/user';
     return this.http.get<AuthResponseInterface>(url).pipe(map(this.getUser));
+  }
+
+  updateCurrentUser(user:CurrentUserInputInterface):Observable<CurrentUserInterface>{
+    const url = ApiUrls.baseUrl + '/user'
+    return this.http.put<AuthResponseInterface>(url, {user}).pipe(map(this.getUser))
   }
 }

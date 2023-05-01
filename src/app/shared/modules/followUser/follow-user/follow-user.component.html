@@ -1,0 +1,9 @@
+<button
+  class="btn btn-sm action-btn "
+  (click)="handleFollow()"
+  [ngClass]="{ 'btn-secondary': followed, 'btn-outline-secondary': !followed }"
+>
+  <i class="ion-plus-round"></i> &nbsp;
+  <span *ngIf="followed">Unfollow</span>
+  <span *ngIf="!followed">Follow</span> {{userNameInput}}
+</button>

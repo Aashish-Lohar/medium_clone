@@ -7,6 +7,7 @@ import { GetUserProfileEffect } from './store/getUserProfile.effect';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/reducers';
 import { FeedModule } from '../shared/modules/feed/feed.module';
+import { FollowUserModule } from '../shared/modules/followUser/follow-user.module';
 
 const routes = [
   {
@@ -14,6 +15,9 @@ const routes = [
   },
   {
     path:'profiles/:slug/favorites', component:UserProfileComponent
+  },
+  {
+    path:'profiles/:slug/follow', component:UserProfileComponent
   },
 ]
 
@@ -25,7 +29,8 @@ const routes = [
     RouterModule.forChild(routes),
     EffectsModule.forFeature([GetUserProfileEffect]),
     StoreModule.forFeature('userProfile',reducers),
-    FeedModule
+    FeedModule,
+    FollowUserModule
   ]
 })
 export class UserProfileModule { }

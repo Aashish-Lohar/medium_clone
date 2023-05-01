@@ -48,7 +48,7 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
   ngOnInit(): void {
     this.initializeValue();
     this.initializeListeners();
-    console.log('apiUrlInput', this.apiUrlInput);
+    // console.log('apiUrlInput', this.apiUrlInput);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -86,7 +86,7 @@ export class FeedComponent implements OnInit, OnDestroy, OnChanges {
     });
 
     const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`;
-    console.log('apiUrlWithParams', apiUrlWithParams);
+    // console.log('apiUrlWithParams', apiUrlWithParams);
     this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
   }
 

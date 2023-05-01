@@ -28,12 +28,12 @@ export class AddToFavoritesComponent implements OnInit{
       slug:this.articleSlugInput
     }))
     if(this.isFavorited){
-      console.log('this.favoritesCount',this.favoritesCount);
+      // console.log('this.favoritesCount',this.favoritesCount);
       
       this.favoritesCount = this.favoritesCount-1
     }
     else{
-      console.log('this.favoritesCount',this.favoritesCount);
+      // console.log('this.favoritesCount',this.favoritesCount);
       this.favoritesCount =this.favoritesCount+1
     }
 

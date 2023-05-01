@@ -29,7 +29,7 @@ export class CreateArticleComponent implements OnInit{
   }
   
   onSubmit(articleInput:ArticleInputInterface){
-    console.log('eeeerroro');
+    // console.log('eeeerroro');
     
     this.store.dispatch(createArticleAction({articleInput}))
   }

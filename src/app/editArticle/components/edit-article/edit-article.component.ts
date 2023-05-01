@@ -69,7 +69,7 @@ export class EditArticleComponent implements OnInit, OnDestroy{
   }
 
   onSubmit(articleInput: ArticleInputInterface) {
-    console.log('eeeerroro');
+    // console.log('eeeerroro');
     this.store.dispatch(updateArticleAction({slug:this.slug, articleInput }));
   }
 }

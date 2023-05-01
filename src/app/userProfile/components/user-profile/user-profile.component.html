@@ -7,9 +7,15 @@
           <h4>{{ userProfile.username }}</h4>
           <p>{{ userProfile.bio }}</p>
           <div>
-            FOLLOW USER BUTTON
+            
+            <app-follow-user
+            *ngIf="!(isCurrentUserProfile$ | async)"
+              [followingInput]="userProfile.following"
+              [apiUrlInput]="slug"
+              [userNameInput]="userProfile.username"
+            ></app-follow-user>
             <a
-            *ngIf="isCurrentUserProfile$ | async"
+              *ngIf="isCurrentUserProfile$ | async"
               [routerLink]="['/settings']"
               class="btn btn-sm btn-outline-secondary action-btn"
             >
@@ -47,7 +53,6 @@
             </li>
           </ul>
         </div>
-        ===={{getApiUrl()}}
         <app-feed [apiUrlInput]="getApiUrl()"></app-feed>
       </div>
     </div>

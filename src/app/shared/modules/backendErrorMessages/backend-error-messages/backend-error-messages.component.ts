@@ -30,7 +30,7 @@ export class BackendErrorMessagesComponent implements OnInit, OnDestroy{
   // myyidea
   if(this.backendErrorsInputObs){
     this.errorMessageSubscription = this.backendErrorsInputObs.subscribe((response)=>{
-      console.log('myidea',response);
+      // console.log('myidea',response);
       if(response){
       this.errorMessages2 = Object.keys(response).map(
         (name:string)=>{

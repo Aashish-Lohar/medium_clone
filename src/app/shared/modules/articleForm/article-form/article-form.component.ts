@@ -34,7 +34,7 @@ export class ArticleFormComponent implements OnInit{
   }
 
   onSubmit(){
-    console.log('erro',this.errorsInput);
+    // console.log('erro',this.errorsInput);
     
     this.form.value.tagList = this.form.value.tagList.split(' ')
     this.articleSubmitEvent.emit(this.form.value)

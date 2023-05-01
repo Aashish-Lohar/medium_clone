@@ -15,7 +15,7 @@ export class CreateArticleService {
 
   createArticle(article:ArticleInputInterface):Observable<ArticleInterface>{
     const fullUrl = ApiUrls.baseUrl + '/articles/'
-    console.log('articlInput',article);
+    // console.log('articlInput',article);
     
     return this.http.post<SaveArticleResponseInterface>(fullUrl, {article}).pipe(
       map((response:SaveArticleResponseInterface)=>{

@@ -1,5 +1,7 @@
 # MediumClone
- Build in Angular, Ngrx and RealWorld Conduit API
+ A knowledge sharing web app where everyone can share the knowledge of there respective domain.
+ 
+# Build in Angular, Ngrx, RxJS and RealWorld Conduit API
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.2.
 
